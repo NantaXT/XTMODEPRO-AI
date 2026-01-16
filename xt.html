@@ -1,88 +1,12 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
+    <title>TES NANTA AI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NANTA AI - PRIBADI</title>
-    <style>
-        body { background: #0f172a; color: white; font-family: sans-serif; display: flex; flex-direction: column; height: 100vh; margin: 0; }
-        .header { background: #1e293b; padding: 15px; text-align: center; border-bottom: 2px solid #38bdf8; }
-        #chat-box { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
-        .msg { padding: 10px 15px; border-radius: 15px; max-width: 80%; line-height: 1.4; }
-        .user { background: #38bdf8; align-self: flex-end; color: black; }
-        .ai { background: #334155; align-self: flex-start; }
-        .input-area { background: #1e293b; padding: 15px; display: flex; gap: 10px; }
-        input { flex: 1; padding: 12px; border-radius: 8px; border: none; outline: none; background: #334155; color: white; }
-        button { background: #38bdf8; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
-    </style>
 </head>
-<body>
-
-<div class="header">
-    <h2>NANTA AI PRIVATE</h2>
-    <small>No Ads | No Login | Voice Enabled</small>
-</div>
-
-<div id="chat-box">
-    <div class="msg ai">Halo Bang! Ini NANTA AI versi pribadi. Tanyain apa aja, saya bakal jawab dan ngomong pakai suara.</div>
-</div>
-
-<div class="input-area">
-    <input type="text" id="user-input" placeholder="Ketik pesan di sini...">
-    <button onclick="sendMessage()">KIRIM</button>
-</div>
-
-<script>
-    const chatBox = document.getElementById('chat-box');
-    const inputField = document.getElementById('user-input');
-
-    // Fungsi kirim pesan ke Otak AI (Hugging Face API)
-    async function sendMessage() {
-        const text = inputField.value;
-        if (!text) return;
-
-        addMessage(text, 'user');
-        inputField.value = '';
-
-        const loadingDiv = document.createElement('div');
-        loadingDiv.className = 'msg ai';
-        loadingDiv.innerText = 'Bentar Bang, mikir dulu...';
-        chatBox.appendChild(loadingDiv);
-
-        try {
-            const response = await fetch("https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill", {
-                headers: { "Content-Type": "application/json" },
-                method: "POST",
-                body: JSON.stringify({ inputs: text }),
-            });
-            const result = await response.json();
-            
-            chatBox.removeChild(loadingDiv);
-            const aiReply = result[0]?.generated_text || "Maaf Bang, sinyalnya lagi lemah.";
-            
-            addMessage(aiReply, 'ai');
-            speak(aiReply);
-        } catch (error) {
-            chatBox.removeChild(loadingDiv);
-            addMessage("Koneksi error, Bang.", "ai");
-        }
-    }
-
-    function addMessage(text, sender) {
-        const div = document.createElement('div');
-        div.className = `msg ${sender}`;
-        div.innerText = text;
-        chatBox.appendChild(div);
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    function speak(text) {
-        const msg = new SpeechSynthesisUtterance();
-        msg.text = text;
-        msg.lang = 'id-ID'; 
-        window.speechSynthesis.speak(msg);
-    }
-</script>
-
+<body style="background: #0f172a; color: white; text-align: center; padding: 50px;">
+    <h1>HALO BANG!</h1>
+    <p>Kalau tulisan ini muncul, berarti webnya sudah jalan.</p>
+    <button onclick="alert('Berhasil!')">KLIK SAYA</button>
 </body>
 </html>
