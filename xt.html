@@ -3,61 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhatsApp Unban Helper - NantaXT</title>
+    <title>XT MODE PRO - Unban WA</title>
     <style>
-        body { font-family: sans-serif; background: #0b141a; color: white; margin: 0; padding: 20px; text-align: center; }
-        .card { background: #202c33; padding: 25px; border-radius: 15px; max-width: 450px; margin: auto; border-top: 5px solid #25d366; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-        h2 { color: #25d366; margin-bottom: 10px; }
-        .menu-label { text-align: left; font-size: 14px; color: #8696a0; margin-bottom: 5px; display: block; }
-        select, input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: #2a3942; color: white; box-sizing: border-box; }
-        button { width: 100%; background: #25d366; color: #0b141a; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
-        .footer { font-size: 11px; color: #8696a0; margin-top: 20px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0b141a; color: white; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .card { background: #202c33; padding: 30px; border-radius: 20px; max-width: 400px; width: 100%; border-top: 6px solid #25d366; box-shadow: 0 15px 35px rgba(0,0,0,0.5); text-align: center; }
+        h1 { color: #25d366; margin: 0; font-size: 28px; letter-spacing: 1px; }
+        p { color: #8696a0; font-size: 14px; margin-top: 5px; margin-bottom: 25px; }
+        .input-group { text-align: left; margin-bottom: 20px; }
+        label { font-size: 13px; color: #25d366; margin-left: 5px; font-weight: bold; }
+        input { width: 100%; padding: 15px; margin-top: 8px; border-radius: 12px; border: none; background: #2a3942; color: white; box-sizing: border-box; font-size: 16px; outline: none; border: 1px solid transparent; transition: 0.3s; }
+        input:focus { border: 1px solid #25d366; }
+        .btn-unban { width: 100%; background: #25d366; color: #0b141a; border: none; padding: 18px; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .btn-unban:hover { background: #1da851; transform: scale(1.02); }
+        .promo { margin-top: 30px; padding-top: 20px; border-top: 1px solid #313d45; font-size: 12px; color: #8696a0; }
+        .promo a { color: #25d366; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>WA UNBAN HELPER</h2>
-    <p style="font-size: 14px; margin-bottom: 20px;">Gunakan teks banding bahasa luar agar lebih cepat direspon sistem WA.</p>
+    <h1>XT MODE PRO</h1>
+    <p>WhatsApp Unban System Otomatis</p>
     
-    <label class="menu-label">Pilih Jenis Laporan (Menu):</label>
-    <select id="reason">
-        <option value="1">🇪🇸 Opsi 1: Masalah Medis/Keluarga</option>
-        <option value="2">🇫🇷 Opsi 2: Masalah Bisnis Roti/Spam</option>
-        <option value="3">🇧🇷 Opsi 3: HP Hilang/Kode Brankas</option>
-    </select>
+    <div class="input-group">
+        <label>NOMOR WHATSAPP TERBLOKIR</label>
+        <input type="text" id="phone" placeholder="Contoh: +6281234567xxx">
+    </div>
 
-    <label class="menu-label">Masukkan Nomor WA Terblokir:</label>
-    <input type="text" id="phone" placeholder="Contoh: +62812345678">
-
-    <button onclick="sendUnban()">PROSES UNBAN SEKARANG</button>
+    <button class="btn-unban" onclick="prosesUnban()">UNBANNED</button>
     
-    <div class="footer">
-        © 2026 NantaXT Private Tool. Terhubung ke support@support.whatsapp.com
+    <div class="promo">
+        Dukung terus channel ini Bang!<br>
+        Subscribe YouTube: <a href="https://www.youtube.com/@XTMODEPRO">XTMODEPRO</a>
     </div>
 </div>
 
 <script>
-function sendUnban() {
+function prosesUnban() {
     const phone = document.getElementById('phone').value;
-    const reason = document.getElementById('reason').value;
     
-    if(!phone) { alert("Nomornya diisi dulu Bang!"); return; }
-
-    let text = "";
-    let subject = "Question about my account";
-
-    if(reason == "1") {
-        text = "Estimado equipo de WhatsApp, estoy aquí para presentar un informe porque mi número y el de mi familia han sido bloqueados por WhatsApp, lo que dificulta la comunicación a larga distancia para nosotros. Además, mi número es el que se utiliza para el registro en el hospital donde está siendo atendida mi abuela, por lo que solicito encarecidamente a WhatsApp que desbloquee mi número. Gracias. El número es: " + phone;
-        subject = "Solicitud de desbloqueo urgente";
-    } else if(reason == "2") {
-        text = "À l'attention de WhatsApp, je tiens à déposer une plainte car le numéro principal de mon restaurant de pain a été bloqué simplement parce que le nombre de messages de commande sur ce numéro a explosé, ce qui a conduit WhatsApp à détecter du spam et à bloquer mon numéro WhatsApp. Veuillez débloquer le numéro principal de mon restaurant de pain. Merci, le numéro est : " + phone;
-        subject = "Réclamation pour blocage de numéro";
-    } else {
-        text = "À estimada equipe do WhatsApp, gostaria de reportar que o número principal da minha família foi bloqueado e proibido de usar o WhatsApp. O meu celular foi furtado por outra pessoa há alguns dias e essa pessoa está usando o meu número para fins criminosos. Tentei fazer login novamente, mas o WhatsApp bloqueou o número. Eu peço que desbloqueiem este número porque ele contém o código do cofre da minha família. O número é: " + phone;
-        subject = "Número furtado e bloqueado";
+    if(!phone || phone.length < 10) { 
+        alert("Masukkan nomor WA yang bener dulu Bang!"); 
+        return; 
     }
 
+    // Menggunakan Teks Portugis (Opsi 3) karena alasannya paling mendesak (Kode Brankas/Kriminal)
+    const subject = "Número furtado e bloqueado";
+    const text = "À estimada equipe do WhatsApp, gostaria de reportar que o número principal da minha família foi bloqueado e proibido de usar o WhatsApp. O meu celular foi furtado por outra pessoa há alguns dias e essa pessoa está usando o meu número para fins criminosos. Tentei fazer login novamente, mas o WhatsApp bloqueou o número. Eu peço que desbloqueiem este número porque ele contém o código do cofre da minha família. O número é: " + phone;
+
+    // Otomatis buka Gmail
     window.location.href = "mailto:support@support.whatsapp.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(text);
 }
 </script>
