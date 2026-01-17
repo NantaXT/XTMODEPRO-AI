@@ -3,66 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XTMODEPRO AI - DYNAMIC UNBAN</title>
+    <title>XTMODEPRO - SEQUENTIAL UNBAN</title>
     <style>
         body { background: #000; color: #00ff00; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .terminal { border: 2px solid #00ff00; padding: 20px; width: 90%; max-width: 400px; box-shadow: 0 0 15px #00ff00; }
-        .header { font-weight: bold; margin-bottom: 20px; text-align: center; border-bottom: 1px solid #00ff00; padding-bottom: 10px; }
-        input { width: 100%; background: #000; border: 1px solid #00ff00; color: #00ff00; padding: 12px; margin-bottom: 15px; text-align: center; outline: none; font-size: 18px; }
-        .btn-ai { width: 100%; background: #00ff00; color: #000; border: none; padding: 15px; font-weight: bold; cursor: pointer; font-size: 14px; text-transform: uppercase; }
-        #console { background: #050505; height: 120px; padding: 10px; font-size: 11px; margin-top: 15px; border: 1px solid #222; overflow-y: auto; text-align: left; }
+        .terminal { border: 2px solid #00ff00; padding: 20px; width: 90%; max-width: 400px; box-shadow: 0 0 15px #00ff00; text-align: center; }
+        input { width: 100%; background: #000; border: 1px solid #00ff00; color: #00ff00; padding: 12px; margin: 15px 0; outline: none; text-align: center; font-size: 18px; border-radius: 5px; }
+        .btn-gas { width: 100%; background: #00ff00; color: #000; border: none; padding: 15px; font-weight: bold; cursor: pointer; font-size: 14px; text-transform: uppercase; }
+        .btn-gas:disabled { background: #555; color: #111; cursor: not-allowed; box-shadow: none; }
+        #counter { margin-top: 10px; font-size: 12px; color: #fff; }
+        #log { background: #050505; height: 80px; padding: 10px; font-size: 11px; margin-top: 15px; border: 1px solid #222; text-align: left; }
     </style>
 </head>
 <body>
 
 <div class="terminal">
-    <div class="header">XTMODEPRO AI BYPASS V3</div>
+    <div style="font-weight: bold; margin-bottom: 10px;">XTMODEPRO SEQUENTIAL v4</div>
     <input type="number" id="no" placeholder="NOMOR WA (628...)">
-    <button class="btn-ai" onclick="generateAndSend()">GENERATE AI REASON & SEND</button>
-    <div id="console">> AI Engine Ready...<br>> Waiting for input...</div>
+    
+    <button id="mainBtn" class="btn-gas" onclick="gasBerurutan()">KIRIM EMAIL BRUTAL</button>
+    
+    <div id="counter">ATTEMPT: <span id="countNum">0</span> / 10</div>
+    
+    <div id="log">> System Ready...</div>
 </div>
 
 <script>
-function generateAndSend() {
-    var no = document.getElementById('no').value;
-    var log = document.getElementById('console');
-    if(!no) { alert("Nomornya mana Bang?"); return; }
+    var currentStep = 0;
+    var totalClick = 0;
 
-    // DATABASE ALASAN BRUTAL (AI RANDOMIZER)
-    var reasons = [
-        {
-            sub: "URGENT: ERROR CODE #9921 - MEDICAL EMERGENCY",
-            body: "CRITICAL: My account +" + no + " is required for emergency medical coordination. This ban is a 'False Positive'. Restore access immediately to prevent safety risks."
-        },
-        {
-            sub: "LEGAL INQUIRY: WRONGFUL SERVICE TERMINATION",
-            body: "My WhatsApp +" + no + " was banned without violation. This interferes with my legal business obligations. I demand an immediate manual review and reactivation."
-        },
-        {
-            sub: "TECHNICAL BUG REPORT: ACCOUNT ACCESS FAILURE",
-            body: "I noticed my account +" + no + " was banned after the latest update. This is a technical system error. I have never violated ToS. Please fix this bug and restore my account."
-        },
-        {
-            sub: "COMPROMISED ACCOUNT: SECURITY RESTORATION",
-            body: "My account +" + no + " was recently accessed by an unauthorized device. I have secured it now. Please unban so I can continue using my secured account for work."
-        }
+    // DAFTAR ALASAN BERURUTAN
+    var listTeks = [
+        { s: "URGENT: MEDICAL EMERGENCY ACCESS #1", b: "Medical coordination needed. Please unban +" },
+        { s: "LEGAL NOTICE: WRONGFUL BAN #2", b: "This ban violates my business terms. Restore +" },
+        { s: "TECHNICAL REPORT: BUG ERROR #3", b: "System glitch detected on account +" },
+        { s: "SECURITY BREACH: RECOVERY #4", b: "Account secured after hack. Unban +" },
+        { s: "EMERGENCY: FAMILY COORDINATION #5", b: "Critical family matter. Need access for +" },
+        { s: "URGENT: WORK ACCESS REQUIRED #6", b: "Office documents are in this account +" },
+        { s: "SYSTEM FAILURE: FALSE POSITIVE #7", b: "Your bot made a mistake on number +" },
+        { s: "APPEAL: MANUAL REVIEW REQUEST #8", b: "Requesting human staff to check +" },
+        { s: "CRITICAL: GOVERNMENT SERVICES #9", b: "Government apps linked to number +" },
+        { s: "FINAL NOTICE: RESTORE ACCOUNT #10", b: "Final attempt to restore my access for +" }
     ];
 
-    // PILIH ACAK OLEH "AI"
-    var randomIdx = Math.floor(Math.random() * reasons.length);
-    var selected = reasons[randomIdx];
+    function gasBerurutan() {
+        var no = document.getElementById('no').value;
+        var log = document.getElementById('log');
+        var btn = document.getElementById('mainBtn');
+        var countDisplay = document.getElementById('countNum');
 
-    log.innerHTML = "> AI Selecting Best Reason...<br>> Found: " + selected.sub;
+        if(!no) { alert("Nomor Kosong Bang!"); return; }
 
-    setTimeout(() => {
-        var email = "support@support.whatsapp.com";
-        // EKSEKUSI BUKA GMAIL
-        window.location.href = "mailto:" + email + "?subject=" + encodeURIComponent(selected.sub) + "&body=" + encodeURIComponent(selected.body);
+        // Ambil data berdasarkan urutan (Step)
+        var data = listTeks[currentStep];
         
-        log.innerHTML += "<br>> Redirecting to Gmail...";
-        log.innerHTML += "<br>> [DONE] Click SEND in Gmail app.";
-    }, 1000);
-}
+        log.innerHTML = "> Executing Step " + (currentStep + 1) + "...<br>> Sub: " + data.s;
+
+        // Buka Gmail
+        var mail = "support@support.whatsapp.com";
+        window.location.href = "mailto:" + mail + "?subject=" + encodeURIComponent(data.s) + "&body=" + encodeURIComponent(data.b + no);
+
+        // Update Urutan & Counter
+        currentStep = (currentStep + 1) % listTeks.length; // Balik ke 0 kalau sudah 10
+        totalClick++;
+        countDisplay.innerText = totalClick;
+
+        // Cek Limit 10
+        if(totalClick >= 10) {
+            btn.innerText = "MAX";
+            btn.disabled = true;
+            log.innerHTML += "<br>[!] LIMIT REACHED. SYSTEM LOCKED.";
+        }
+    }
 </script>
 
 </body>
