@@ -3,71 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XTMODEPRO - BRUTAL UNBAN WA</title>
+    <title>XTMODEPRO - EMAIL BOMBER V1</title>
     <style>
-        :root { --primary: #00ff41; --bg: #050505; --card: #111; }
-        body { font-family: 'Courier New', monospace; background: var(--bg); color: var(--primary); margin: 0; padding: 20px; text-align: center; }
-        .wrapper { max-width: 500px; margin: auto; border: 2px solid var(--primary); border-radius: 10px; padding: 20px; box-shadow: 0 0 20px rgba(0,255,65,0.2); }
-        h1 { font-size: 26px; text-shadow: 0 0 10px var(--primary); margin-bottom: 5px; }
-        .version { font-size: 10px; background: var(--primary); color: #000; padding: 2px 10px; border-radius: 5px; font-weight: bold; }
-        .input-group { text-align: left; margin-top: 25px; }
-        label { display: block; font-size: 12px; margin-bottom: 5px; font-weight: bold; }
-        input { width: 100%; background: #000; border: 1px solid var(--primary); padding: 12px; color: var(--primary); border-radius: 5px; box-sizing: border-box; outline: none; margin-bottom: 15px; }
-        .btn-brutal { width: 100%; background: var(--primary); color: #000; border: none; padding: 15px; font-weight: bold; font-size: 16px; cursor: pointer; border-radius: 5px; transition: 0.3s; box-shadow: 0 0 15px rgba(0,255,65,0.4); }
-        .btn-brutal:hover { background: #fff; box-shadow: 0 0 25px #fff; }
-        #log-screen { background: #000; height: 100px; border: 1px solid #333; margin-top: 20px; padding: 10px; font-size: 11px; overflow-y: hidden; text-align: left; color: #00ff4188; }
-        .footer { margin-top: 20px; font-size: 9px; color: #555; letter-spacing: 1px; }
-        .urgent-tag { color: #ff0000; font-size: 11px; font-weight: bold; animation: blink 1s infinite; }
-        @keyframes blink { 0% {opacity:1;} 50% {opacity:0;} 100% {opacity:1;} }
+        body { background: #000; color: #00ff00; font-family: 'Courier New', monospace; padding: 20px; }
+        .terminal { border: 1px solid #00ff00; padding: 20px; max-width: 500px; margin: auto; box-shadow: 0 0 15px #00ff00; }
+        .header { text-align: center; border-bottom: 1px solid #00ff00; margin-bottom: 20px; padding-bottom: 10px; }
+        input, select { background: #000; border: 1px solid #00ff00; color: #00ff00; width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; outline: none; }
+        .btn-spam { background: #00ff00; color: #000; border: none; width: 100%; padding: 15px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .console { background: #050505; height: 150px; padding: 10px; font-size: 11px; overflow-y: auto; border: 1px solid #222; margin-top: 15px; }
+        .cursor { animation: blink 1s infinite; }
+        @keyframes blink { 0% {opacity:0;} 50% {opacity:1;} 100% {opacity:0;} }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
-    <h1>XTMODEPRO VIP</h1>
-    <span class="version">BYPASS VERSION 9.9.2 - BRUTAL MODE</span>
-    <p class="urgent-tag">WARNING: USE FOR EMERGENCY ONLY!</p>
-
-    <div class="input-group">
-        <label>TARGET PHONE NUMBER:</label>
-        <input type="number" id="no-wa" placeholder="e.g. 628123456xxx">
-        
-        <label>BYPASS METHOD:</label>
-        <select id="method" style="width:100%; background:#000; color:#00ff41; border:1px solid #00ff41; padding:12px; border-radius:5px;">
-            <option>Direct Medical Emergency Appeal</option>
-            <option>Legal Liability Threat Bypass</option>
-            <option>System Error Code #9921 Injection</option>
-        </select>
+<div class="terminal">
+    <div class="header">
+        <pre>
+__  _______ __  __  ____  ____  _____ 
+\ \/ /_   _|  \/  |/ __ \|  _ \| ____|
+ \  /  | | | |\/| | |  | | |_) |  _|  
+ /  \  | | | |  | | |__| |  _ <| |___ 
+/_/\_\ |_| |_|  |_|\____/|_| \_\_____|</pre>
+        <span>WA UNBAN BOMBER (TERMUX CLOUD)</span>
     </div>
 
-    <div id="log-screen">
-        > SYSTEM READY...<br>
-        > WAITING FOR COMMAND...
-    </div>
+    <label>TARGET NUMBER:</label>
+    <input type="number" id="no" placeholder="628xxxxxxx">
+    
+    <label>THREAD (JUMLAH EMAIL):</label>
+    <select id="threads">
+        <option value="50">50 Emails (Normal)</option>
+        <option value="100">100 Emails (Turbo)</option>
+        <option value="500">500 Emails (ULTRA BRUTAL)</option>
+    </select>
 
-    <button class="btn-brutal" style="margin-top:20px;" onclick="startBrutal()">GENERATE BRUTAL TEXT</button>
+    <button class="btn-spam" onclick="runSpam()">START BOMBER</button>
+
+    <div class="console" id="out">
+        [system] ready to attack...<br>
+        [system] waiting for command...<span class="cursor">_</span>
+    </div>
 </div>
 
-<div class="footer">DEVELOPED BY NANTA XT - PRIVATE CLOUD SERVER 2026</div>
-
 <script>
-function startBrutal() {
-    var no = document.getElementById('no-wa').value;
-    var log = document.getElementById('log-screen');
-    if(!no) { alert("Input Nomor Dulu Bang!"); return; }
+function runSpam() {
+    var no = document.getElementById('no').value;
+    var out = document.getElementById('out');
+    if(!no) { alert("Nomor Kosong!"); return; }
 
-    log.innerHTML = "> INJECTING EMERGENCY CODE...<br>> BYPASSING META SECURITY...";
-    
+    out.innerHTML += "<br>[*] Initializing python3...";
     setTimeout(() => {
-        log.innerHTML += "<br>> GENERATING BRUTAL TEXT FOR " + no + "...";
+        out.innerHTML += "<br>[*] Connecting to SMTP Gmail Server...";
         setTimeout(() => {
-            log.innerHTML += "<br>> SUCCESS! REDIRECTING TO DOWNLOAD SERVER...";
-            setTimeout(() => {
-                // ARAHKAN KE LINK SAFELINKU ABANG
-                window.location.href = "https://safelinku.com/LINK_DEX_ATAU_TEKS_ABANG";
-            }, 1500);
+            out.innerHTML += "<br>[!] Sending Brutal Emails to support@whatsapp.com...";
+            var count = 0;
+            var interval = setInterval(() => {
+                count++;
+                out.innerHTML += "<br>[SUCCESS] Email #" + count + " Sent!";
+                out.scrollTop = out.scrollHeight;
+                if(count >= 5) { 
+                    clearInterval(interval);
+                    out.innerHTML += "<br>[+] CLOUD LIMIT REACHED. GET PRO SCRIPT...";
+                    setTimeout(() => {
+                        // Arahkan ke Safelinku Abang yang isinya script Termux asli
+                        window.location.href = "https://safelinku.com/LINK_SCRIPT_TERMUX_ABANG";
+                    }, 2000);
+                }
+            }, 500);
         }, 1500);
-    }, 1500);
+    }, 1000);
 }
 </script>
 
