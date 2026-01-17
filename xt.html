@@ -3,46 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XTMODEPRO - MURNI UNBAN</title>
+    <title>XTMODEPRO AI - DYNAMIC UNBAN</title>
     <style>
         body { background: #000; color: #00ff00; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .terminal { border: 2px solid #00ff00; padding: 20px; width: 90%; max-width: 400px; box-shadow: 0 0 15px #00ff00; text-align: center; }
-        input { width: 100%; background: #000; border: 1px solid #00ff00; color: #00ff00; padding: 12px; margin: 15px 0; outline: none; text-align: center; font-size: 18px; }
-        .btn-kirim { width: 100%; background: #00ff00; color: #000; border: none; padding: 15px; font-weight: bold; cursor: pointer; font-size: 16px; }
-        #console { background: #050505; height: 100px; padding: 10px; font-size: 12px; margin-top: 15px; border: 1px solid #222; overflow: hidden; text-align: left; }
+        .terminal { border: 2px solid #00ff00; padding: 20px; width: 90%; max-width: 400px; box-shadow: 0 0 15px #00ff00; }
+        .header { font-weight: bold; margin-bottom: 20px; text-align: center; border-bottom: 1px solid #00ff00; padding-bottom: 10px; }
+        input { width: 100%; background: #000; border: 1px solid #00ff00; color: #00ff00; padding: 12px; margin-bottom: 15px; text-align: center; outline: none; font-size: 18px; }
+        .btn-ai { width: 100%; background: #00ff00; color: #000; border: none; padding: 15px; font-weight: bold; cursor: pointer; font-size: 14px; text-transform: uppercase; }
+        #console { background: #050505; height: 120px; padding: 10px; font-size: 11px; margin-top: 15px; border: 1px solid #222; overflow-y: auto; text-align: left; }
     </style>
 </head>
 <body>
 
 <div class="terminal">
-    <div style="font-weight: bold; margin-bottom: 10px;">[ XTMODEPRO UNBAN ENGINE ]</div>
-    <input type="number" id="no" placeholder="Masukkan Nomor WA">
-    <button class="btn-kirim" onclick="kirimSekarang()">KIRIM EMAIL BRUTAL</button>
-    <div id="console">> System Ready...</div>
+    <div class="header">XTMODEPRO AI BYPASS V3</div>
+    <input type="number" id="no" placeholder="NOMOR WA (628...)">
+    <button class="btn-ai" onclick="generateAndSend()">GENERATE AI REASON & SEND</button>
+    <div id="console">> AI Engine Ready...<br>> Waiting for input...</div>
 </div>
 
 <script>
-function kirimSekarang() {
+function generateAndSend() {
     var no = document.getElementById('no').value;
     var log = document.getElementById('console');
+    if(!no) { alert("Nomornya mana Bang?"); return; }
 
-    if(!no) { alert("Nomor mana Bang?"); return; }
+    // DATABASE ALASAN BRUTAL (AI RANDOMIZER)
+    var reasons = [
+        {
+            sub: "URGENT: ERROR CODE #9921 - MEDICAL EMERGENCY",
+            body: "CRITICAL: My account +" + no + " is required for emergency medical coordination. This ban is a 'False Positive'. Restore access immediately to prevent safety risks."
+        },
+        {
+            sub: "LEGAL INQUIRY: WRONGFUL SERVICE TERMINATION",
+            body: "My WhatsApp +" + no + " was banned without violation. This interferes with my legal business obligations. I demand an immediate manual review and reactivation."
+        },
+        {
+            sub: "TECHNICAL BUG REPORT: ACCOUNT ACCESS FAILURE",
+            body: "I noticed my account +" + no + " was banned after the latest update. This is a technical system error. I have never violated ToS. Please fix this bug and restore my account."
+        },
+        {
+            sub: "COMPROMISED ACCOUNT: SECURITY RESTORATION",
+            body: "My account +" + no + " was recently accessed by an unauthorized device. I have secured it now. Please unban so I can continue using my secured account for work."
+        }
+    ];
 
-    // Efek Teks Terminal
-    log.innerHTML = "> Memproses Nomor: " + no;
-    
-    // DATA EMAIL BRUTAL
-    var email = "support@support.whatsapp.com";
-    var sub = "URGENT: ERROR CODE #9921 - EMERGENCY SAFETY RISK";
-    var body = "I am reporting a CRITICAL SYSTEM ERROR. My account +" + no + " has been wrongfully flagged by your bot. This is a catastrophic 'False Positive'. This account is my ONLY access for EMERGENCY MEDICAL COORDINATION. I demand an IMMEDIATE manual override and reactivation NOW. RESTORE IT NOW.";
+    // PILIH ACAK OLEH "AI"
+    var randomIdx = Math.floor(Math.random() * reasons.length);
+    var selected = reasons[randomIdx];
 
-    // INI INTI NYA: BUKA GMAIL LANGSUNG
-    window.location.href = "mailto:" + email + "?subject=" + encodeURIComponent(sub) + "&body=" + encodeURIComponent(body);
+    log.innerHTML = "> AI Selecting Best Reason...<br>> Found: " + selected.sub;
 
-    // Update log setelah buka gmail
     setTimeout(() => {
-        log.innerHTML += "<br>> Redirected to Gmail Success.";
-        log.innerHTML += "<br>> Silahkan Kirim dan Tunggu 30 Menit.";
+        var email = "support@support.whatsapp.com";
+        // EKSEKUSI BUKA GMAIL
+        window.location.href = "mailto:" + email + "?subject=" + encodeURIComponent(selected.sub) + "&body=" + encodeURIComponent(selected.body);
+        
+        log.innerHTML += "<br>> Redirecting to Gmail...";
+        log.innerHTML += "<br>> [DONE] Click SEND in Gmail app.";
     }, 1000);
 }
 </script>
