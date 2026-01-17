@@ -5,70 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XTMODEPRO - SEQUENTIAL UNBAN</title>
     <style>
-        body { background: #000; color: #00ff00; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        body { background: #000; color: #00ff00; font-family: monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
         .terminal { border: 2px solid #00ff00; padding: 20px; width: 90%; max-width: 400px; box-shadow: 0 0 15px #00ff00; text-align: center; }
-        input { width: 100%; background: #000; border: 1px solid #00ff00; color: #00ff00; padding: 12px; margin: 15px 0; outline: none; text-align: center; font-size: 18px; border-radius: 5px; }
-        .btn-gas { width: 100%; background: #00ff00; color: #000; border: none; padding: 15px; font-weight: bold; cursor: pointer; font-size: 14px; text-transform: uppercase; }
-        .btn-gas:disabled { background: #555; color: #111; cursor: not-allowed; box-shadow: none; }
-        #counter { margin-top: 10px; font-size: 12px; color: #fff; }
-        #log { background: #050505; height: 80px; padding: 10px; font-size: 11px; margin-top: 15px; border: 1px solid #222; text-align: left; }
+        input { width: 100%; background: #000; border: 1px solid #00ff00; color: #00ff00; padding: 12px; margin: 15px 0; text-align: center; font-size: 18px; }
+        .btn-gas { width: 100%; background: #00ff00; color: #000; border: none; padding: 15px; font-weight: bold; cursor: pointer; }
+        .btn-gas:disabled { background: #333; color: #888; cursor: not-allowed; }
+        #log { background: #050505; height: 100px; padding: 10px; font-size: 11px; margin-top: 15px; border: 1px solid #222; text-align: left; overflow: hidden; }
     </style>
 </head>
 <body>
 
 <div class="terminal">
-    <div style="font-weight: bold; margin-bottom: 10px;">XTMODEPRO SEQUENTIAL v4</div>
-    <input type="number" id="no" placeholder="NOMOR WA (628...)">
-    
-    <button id="mainBtn" class="btn-gas" onclick="gasBerurutan()">KIRIM EMAIL BRUTAL</button>
-    
-    <div id="counter">ATTEMPT: <span id="countNum">0</span> / 10</div>
-    
-    <div id="log">> System Ready...</div>
+    <div style="font-weight: bold;">[ XTMODEPRO UNBAN V4 ]</div>
+    <input type="number" id="no" placeholder="628xxxxxxxx">
+    <button id="mainBtn" class="btn-gas" onclick="jalankan()">KIRIM EMAIL BRUTAL</button>
+    <div id="counter" style="margin-top:10px;">PROGRESS: <span id="num">0</span> / 10</div>
+    <div id="log">> Ready to bypass...</div>
 </div>
 
 <script>
-    var currentStep = 0;
-    var totalClick = 0;
-
-    // DAFTAR ALASAN BERURUTAN
+    // Database 10 teks berbeda
     var listTeks = [
-        { s: "URGENT: MEDICAL EMERGENCY ACCESS #1", b: "Medical coordination needed. Please unban +" },
-        { s: "LEGAL NOTICE: WRONGFUL BAN #2", b: "This ban violates my business terms. Restore +" },
-        { s: "TECHNICAL REPORT: BUG ERROR #3", b: "System glitch detected on account +" },
-        { s: "SECURITY BREACH: RECOVERY #4", b: "Account secured after hack. Unban +" },
-        { s: "EMERGENCY: FAMILY COORDINATION #5", b: "Critical family matter. Need access for +" },
-        { s: "URGENT: WORK ACCESS REQUIRED #6", b: "Office documents are in this account +" },
-        { s: "SYSTEM FAILURE: FALSE POSITIVE #7", b: "Your bot made a mistake on number +" },
-        { s: "APPEAL: MANUAL REVIEW REQUEST #8", b: "Requesting human staff to check +" },
-        { s: "CRITICAL: GOVERNMENT SERVICES #9", b: "Government apps linked to number +" },
-        { s: "FINAL NOTICE: RESTORE ACCOUNT #10", b: "Final attempt to restore my access for +" }
+        { s: "URGENT_1: MEDICAL COORDINATION", b: "Need access for medical emergency on +" },
+        { s: "LEGAL_2: WRONGFUL TERMINATION", b: "Business law violation on number +" },
+        { s: "TECH_3: SYSTEM ERROR #9921", b: "False positive detection for +" },
+        { s: "SEC_4: ACCOUNT RECOVERY", b: "Account secured after hacking on +" },
+        { s: "HELP_5: FAMILY EMERGENCY", b: "Urgent family contact needed for +" },
+        { s: "WORK_6: ACCESS REQUIRED", b: "Company documents linked to +" },
+        { s: "APPEAL_7: MANUAL REVIEW", b: "Request human review for account +" },
+        { s: "GOV_8: PUBLIC SERVICES", b: "Government apps registered to +" },
+        { s: "WARN_9: SYSTEM GLITCH", b: "App crashed and banned number +" },
+        { s: "FINAL_10: RESTORE NOW", b: "Final attempt to restore access for +" }
     ];
 
-    function gasBerurutan() {
+    var klik = 0;
+
+    function jalankan() {
         var no = document.getElementById('no').value;
-        var log = document.getElementById('log');
         var btn = document.getElementById('mainBtn');
-        var countDisplay = document.getElementById('countNum');
+        var log = document.getElementById('log');
+        var num = document.getElementById('num');
 
-        if(!no) { alert("Nomor Kosong Bang!"); return; }
+        if(!no) { alert("Nomor mana Bang?"); return; }
+        if(klik >= 10) return;
 
-        // Ambil data berdasarkan urutan (Step)
-        var data = listTeks[currentStep];
-        
-        log.innerHTML = "> Executing Step " + (currentStep + 1) + "...<br>> Sub: " + data.s;
+        // Ambil teks sesuai urutan klik (0 sampai 9)
+        var data = listTeks[klik];
 
-        // Buka Gmail
+        // LOGIKA GANTI TEKS
+        log.innerHTML = "> Executing Sequence: " + (klik + 1) + "<br>> Sub: " + data.s;
+
+        // BUKA GMAIL DENGAN DATA BERBEDA
         var mail = "support@support.whatsapp.com";
         window.location.href = "mailto:" + mail + "?subject=" + encodeURIComponent(data.s) + "&body=" + encodeURIComponent(data.b + no);
 
-        // Update Urutan & Counter
-        currentStep = (currentStep + 1) % listTeks.length; // Balik ke 0 kalau sudah 10
-        totalClick++;
-        countDisplay.innerText = totalClick;
+        // Nambah angka
+        klik++;
+        num.innerText = klik;
 
-        // Cek Limit 10
-        if(totalClick >= 10) {
+        // Cek kalau sudah 10
+        if(klik >= 10) {
             btn.innerText = "MAX";
             btn.disabled = true;
             log.innerHTML += "<br>[!] LIMIT REACHED. SYSTEM LOCKED.";
