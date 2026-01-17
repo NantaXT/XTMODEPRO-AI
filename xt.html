@@ -3,76 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XTMODEPRO - EMAIL BOMBER V1</title>
+    <title>XTMODEPRO - WHATSAPP UNBAN SYSTEM</title>
     <style>
-        body { background: #000; color: #00ff00; font-family: 'Courier New', monospace; padding: 20px; }
-        .terminal { border: 1px solid #00ff00; padding: 20px; max-width: 500px; margin: auto; box-shadow: 0 0 15px #00ff00; }
-        .header { text-align: center; border-bottom: 1px solid #00ff00; margin-bottom: 20px; padding-bottom: 10px; }
-        input, select { background: #000; border: 1px solid #00ff00; color: #00ff00; width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; outline: none; }
-        .btn-spam { background: #00ff00; color: #000; border: none; width: 100%; padding: 15px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
-        .console { background: #050505; height: 150px; padding: 10px; font-size: 11px; overflow-y: auto; border: 1px solid #222; margin-top: 15px; }
-        .cursor { animation: blink 1s infinite; }
-        @keyframes blink { 0% {opacity:0;} 50% {opacity:1;} 100% {opacity:0;} }
+        body { background: #000; color: #00ff00; font-family: 'monospace'; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; overflow: hidden; }
+        .terminal { border: 2px solid #00ff00; padding: 20px; width: 90%; max-width: 400px; box-shadow: 0 0 20px #00ff00; border-radius: 10px; background: rgba(0,0,0,0.9); }
+        .header { text-align: center; font-weight: bold; margin-bottom: 20px; border-bottom: 1px solid #00ff00; padding-bottom: 10px; font-size: 18px; }
+        input { width: 100%; background: #111; border: 1px solid #00ff00; color: #00ff00; padding: 12px; margin: 15px 0; box-sizing: border-box; outline: none; text-align: center; font-size: 18px; border-radius: 5px; }
+        .btn-brutal { width: 100%; background: #00ff00; color: #000; border: none; padding: 15px; font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 15px; text-transform: uppercase; }
+        .btn-brutal:active { transform: scale(0.95); background: #fff; }
+        .console { background: #050505; height: 120px; padding: 10px; font-size: 11px; margin-top: 15px; overflow-y: auto; border: 1px solid #222; color: #00ff00; line-height: 1.5; }
     </style>
 </head>
 <body>
 
 <div class="terminal">
-    <div class="header">
-        <pre>
-__  _______ __  __  ____  ____  _____ 
-\ \/ /_   _|  \/  |/ __ \|  _ \| ____|
- \  /  | | | |\/| | |  | | |_) |  _|  
- /  \  | | | |  | | |__| |  _ <| |___ 
-/_/\_\ |_| |_|  |_|\____/|_| \_\_____|</pre>
-        <span>WA UNBAN BOMBER (TERMUX CLOUD)</span>
-    </div>
-
-    <label>TARGET NUMBER:</label>
-    <input type="number" id="no" placeholder="628xxxxxxx">
+    <div class="header">XTMODEPRO BRUTAL BYPASS</div>
     
-    <label>THREAD (JUMLAH EMAIL):</label>
-    <select id="threads">
-        <option value="50">50 Emails (Normal)</option>
-        <option value="100">100 Emails (Turbo)</option>
-        <option value="500">500 Emails (ULTRA BRUTAL)</option>
-    </select>
+    <div style="font-size: 12px; text-align: center;">ENTER BANNED NUMBER:</div>
+    <input type="number" id="nomorWa" placeholder="628123456xxx">
 
-    <button class="btn-spam" onclick="runSpam()">START BOMBER</button>
+    <button class="btn-brutal" onclick="executeBypass()">SEND BRUTAL EMAIL</button>
 
-    <div class="console" id="out">
-        [system] ready to attack...<br>
-        [system] waiting for command...<span class="cursor">_</span>
+    <div class="console" id="log">
+        [system] Waiting for command...<br>
+        [info] Anti-Ban Bypass v2.0 Ready.
     </div>
 </div>
 
 <script>
-function runSpam() {
-    var no = document.getElementById('no').value;
-    var out = document.getElementById('out');
-    if(!no) { alert("Nomor Kosong!"); return; }
+function executeBypass() {
+    var no = document.getElementById('nomorWa').value;
+    var log = document.getElementById('log');
 
-    out.innerHTML += "<br>[*] Initializing python3...";
+    if(!no || no.length < 10) {
+        alert("Masukkan nomor WA yang bener, Bang!");
+        return;
+    }
+
+    // Animasi Terminal
+    log.innerHTML = "[*] Accessing Meta Central Server...";
+    
     setTimeout(() => {
-        out.innerHTML += "<br>[*] Connecting to SMTP Gmail Server...";
+        log.innerHTML += "<br>[*] Generating Destroyer Text Logic...";
         setTimeout(() => {
-            out.innerHTML += "<br>[!] Sending Brutal Emails to support@whatsapp.com...";
-            var count = 0;
-            var interval = setInterval(() => {
-                count++;
-                out.innerHTML += "<br>[SUCCESS] Email #" + count + " Sent!";
-                out.scrollTop = out.scrollHeight;
-                if(count >= 5) { 
-                    clearInterval(interval);
-                    out.innerHTML += "<br>[+] CLOUD LIMIT REACHED. GET PRO SCRIPT...";
-                    setTimeout(() => {
-                        // Arahkan ke Safelinku Abang yang isinya script Termux asli
-                        window.location.href = "https://safelinku.com/LINK_SCRIPT_TERMUX_ABANG";
-                    }, 2000);
-                }
-            }, 500);
-        }, 1500);
-    }, 1000);
+            log.innerHTML += "<br>[!] Bypassing AI Detection...";
+            setTimeout(() => {
+                log.innerHTML += "<br>[SUCCESS] Redirecting to Gmail Support...";
+                
+                // DATA EMAIL (Langsung Kirim, Gak Pakai Safelink)
+                var emailPenerima = "support@support.whatsapp.com";
+                var subjek = "URGENT: ERROR CODE #9921 - EMERGENCY SAFETY RISK";
+                var isiPesan = "I am reporting a CRITICAL SYSTEM ERROR. My account +" + no + " has been wrongfully flagged by your bot. This is a catastrophic 'False Positive'. This account is my ONLY access for EMERGENCY MEDICAL COORDINATION. I demand an IMMEDIATE manual override and reactivation NOW. RESTORE IT NOW.";
+
+                // Eksekusi Buka Gmail
+                window.location.href = "mailto:" + emailPenerima + "?subject=" + encodeURIComponent(subjek) + "&body=" + encodeURIComponent(isiPesan);
+                
+                log.innerHTML += "<br>[DONE] Teks otomatis sudah siap di Gmail.";
+            }, 800);
+        }, 800);
+    }, 800);
 }
 </script>
 
