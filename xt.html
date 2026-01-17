@@ -6,30 +6,35 @@
     <title>WhatsApp Unban Helper - NantaXT</title>
     <style>
         body { font-family: sans-serif; background: #0b141a; color: white; margin: 0; padding: 20px; text-align: center; }
-        .card { background: #202c33; padding: 20px; border-radius: 12px; max-width: 450px; margin: auto; border-top: 5px solid #25d366; }
-        h2 { color: #25d366; }
-        select, input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: #2a3942; color: white; }
-        button { width: 100%; background: #25d366; color: #0b141a; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; }
-        .info { font-size: 12px; color: #8696a0; margin-top: 15px; }
+        .card { background: #202c33; padding: 25px; border-radius: 15px; max-width: 450px; margin: auto; border-top: 5px solid #25d366; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        h2 { color: #25d366; margin-bottom: 10px; }
+        .menu-label { text-align: left; font-size: 14px; color: #8696a0; margin-bottom: 5px; display: block; }
+        select, input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: #2a3942; color: white; box-sizing: border-box; }
+        button { width: 100%; background: #25d366; color: #0b141a; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        .footer { font-size: 11px; color: #8696a0; margin-top: 20px; }
     </style>
 </head>
 <body>
 
 <div class="card">
     <h2>WA UNBAN HELPER</h2>
-    <p>Pilih alasan banding dan masukkan nomor Anda:</p>
+    <p style="font-size: 14px; margin-bottom: 20px;">Gunakan teks banding bahasa luar agar lebih cepat direspon sistem WA.</p>
     
-    <input type="text" id="phone" placeholder="Contoh: +62812345678">
-    
+    <label class="menu-label">Pilih Jenis Laporan (Menu):</label>
     <select id="reason">
-        <option value="1">Opsi 1: Alasan Medis/Keluarga (Spanyol)</option>
-        <option value="2">Opsi 2: Alasan Bisnis/Spam Order (Prancis)</option>
-        <option value="3">Opsi 3: Alasan HP Hilang/Kriminal (Portugis)</option>
+        <option value="1">🇪🇸 Opsi 1: Masalah Medis/Keluarga</option>
+        <option value="2">🇫🇷 Opsi 2: Masalah Bisnis Roti/Spam</option>
+        <option value="3">🇧🇷 Opsi 3: HP Hilang/Kode Brankas</option>
     </select>
 
-    <button onclick="sendUnban()">KIRIM BANDING SEKARANG</button>
+    <label class="menu-label">Masukkan Nomor WA Terblokir:</label>
+    <input type="text" id="phone" placeholder="Contoh: +62812345678">
+
+    <button onclick="sendUnban()">PROSES UNBAN SEKARANG</button>
     
-    <p class="info">Situs ini akan otomatis membuka Gmail Anda dengan teks banding profesional.</p>
+    <div class="footer">
+        © 2026 NantaXT Private Tool. Terhubung ke support@support.whatsapp.com
+    </div>
 </div>
 
 <script>
@@ -37,7 +42,7 @@ function sendUnban() {
     const phone = document.getElementById('phone').value;
     const reason = document.getElementById('reason').value;
     
-    if(!phone) { alert("Masukkan nomor dulu Bang!"); return; }
+    if(!phone) { alert("Nomornya diisi dulu Bang!"); return; }
 
     let text = "";
     let subject = "Question about my account";
@@ -53,7 +58,6 @@ function sendUnban() {
         subject = "Número furtado e bloqueado";
     }
 
-    // Membuka aplikasi Gmail/Email otomatis
     window.location.href = "mailto:support@support.whatsapp.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(text);
 }
 </script>
