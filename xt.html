@@ -1,74 +1,96 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XTMODEPRO - SEQUENTIAL UNBAN</title>
+    <title>XTMODEPRO - ULTRA PROTECT ENCRYPTOR</title>
     <style>
-        body { background: #000; color: #00ff00; font-family: monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .terminal { border: 2px solid #00ff00; padding: 20px; width: 90%; max-width: 400px; box-shadow: 0 0 15px #00ff00; text-align: center; }
-        input { width: 100%; background: #000; border: 1px solid #00ff00; color: #00ff00; padding: 12px; margin: 15px 0; text-align: center; font-size: 18px; }
-        .btn-gas { width: 100%; background: #00ff00; color: #000; border: none; padding: 15px; font-weight: bold; cursor: pointer; }
-        .btn-gas:disabled { background: #333; color: #888; cursor: not-allowed; }
-        #log { background: #050505; height: 100px; padding: 10px; font-size: 11px; margin-top: 15px; border: 1px solid #222; text-align: left; overflow: hidden; }
+        body { background: #000; color: #0f0; font-family: monospace; padding: 15px; text-align: center; }
+        .container { border: 2px solid #0f0; padding: 20px; border-radius: 15px; background: #0a0a0a; box-shadow: 0 0 15px #0f0; }
+        h2 { text-shadow: 0 0 10px #0f0; margin-bottom: 20px; }
+        .upload-area { border: 1px dashed #0f0; padding: 20px; margin-bottom: 20px; border-radius: 10px; }
+        textarea { width: 100%; height: 100px; background: #111; color: #0f0; border: 1px solid #0f0; margin-top: 10px; font-size: 10px; display: none; }
+        button { background: #0f0; color: #000; padding: 15px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 15px; }
+        .status { color: yellow; font-size: 13px; margin-top: 10px; }
+        #downloadBtn { background: #0066ff; color: #fff; display: none; }
     </style>
 </head>
 <body>
 
-<div class="terminal">
-    <div style="font-weight: bold;">[ XTMODEPRO UNBAN V4 ]</div>
-    <input type="number" id="no" placeholder="628xxxxxxxx">
-    <button id="mainBtn" class="btn-gas" onclick="jalankan()">KIRIM EMAIL BRUTAL</button>
-    <div id="counter" style="margin-top:10px;">PROGRESS: <span id="num">0</span> / 10</div>
-    <div id="log">> Ready to bypass...</div>
+<div class="container">
+    <h2>XTMODEPRO ULTRA PROTECT</h2>
+    
+    <div class="upload-area">
+        <input type="file" id="fileInput" accept=".html">
+        <div id="statusInfo" class="status">Pilih file HTML asli kamu</div>
+    </div>
+
+    <button onclick="generateUltraProtect()">ENCRYPT + SELF DESTRUCT</button>
+
+    <textarea id="resultCode" readonly></textarea>
+    <button id="downloadBtn" onclick="unduhFile()">DOWNLOAD HASIL (.HTML)</button>
 </div>
 
 <script>
-    // Database 10 teks berbeda
-    var listTeks = [
-        { s: "URGENT_1: MEDICAL COORDINATION", b: "Need access for medical emergency on +" },
-        { s: "LEGAL_2: WRONGFUL TERMINATION", b: "Business law violation on number +" },
-        { s: "TECH_3: SYSTEM ERROR #9921", b: "False positive detection for +" },
-        { s: "SEC_4: ACCOUNT RECOVERY", b: "Account secured after hacking on +" },
-        { s: "HELP_5: FAMILY EMERGENCY", b: "Urgent family contact needed for +" },
-        { s: "WORK_6: ACCESS REQUIRED", b: "Company documents linked to +" },
-        { s: "APPEAL_7: MANUAL REVIEW", b: "Request human review for account +" },
-        { s: "GOV_8: PUBLIC SERVICES", b: "Government apps registered to +" },
-        { s: "WARN_9: SYSTEM GLITCH", b: "App crashed and banned number +" },
-        { s: "FINAL_10: RESTORE NOW", b: "Final attempt to restore access for +" }
-    ];
+    let rawHtml = "";
 
-    var klik = 0;
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            rawHtml = e.target.result;
+            document.getElementById('statusInfo').innerText = "File Siap: " + file.name;
+        };
+        reader.readAsText(file);
+    });
 
-    function jalankan() {
-        var no = document.getElementById('no').value;
-        var btn = document.getElementById('mainBtn');
-        var log = document.getElementById('log');
-        var num = document.getElementById('num');
+    function generateUltraProtect() {
+        if (!rawHtml) return alert("Pilih file dulu!");
 
-        if(!no) { alert("Nomor mana Bang?"); return; }
-        if(klik >= 10) return;
+        // Enkripsi tahap 1 (Base64)
+        const encoded = btoa(unescape(encodeURIComponent(rawHtml)));
 
-        // Ambil teks sesuai urutan klik (0 sampai 9)
-        var data = listTeks[klik];
+        // SCRIPT PROTEKSI DENGAN SELF-DESTRUCT
+        const protectedTemplate = `<script>
+(function() {
+    // 1. Matikan fungsi klik kanan dan shortcut
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.onkeydown = function(e) {
+        if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73)) return false;
+    };
 
-        // LOGIKA GANTI TEKS
-        log.innerHTML = "> Executing Sequence: " + (klik + 1) + "<br>> Sub: " + data.s;
+    // 2. Decode dan Tampilkan Web
+    const _0xXT = "${encoded}";
+    const _content = decodeURIComponent(escape(atob(_0xXT)));
+    document.open();
+    document.write(_content);
+    document.close();
 
-        // BUKA GMAIL DENGAN DATA BERBEDA
-        var mail = "support@support.whatsapp.com";
-        window.location.href = "mailto:" + mail + "?subject=" + encodeURIComponent(data.s) + "&body=" + encodeURIComponent(data.b + no);
-
-        // Nambah angka
-        klik++;
-        num.innerText = klik;
-
-        // Cek kalau sudah 10
-        if(klik >= 10) {
-            btn.innerText = "MAX";
-            btn.disabled = true;
-            log.innerHTML += "<br>[!] LIMIT REACHED. SYSTEM LOCKED.";
+    // 3. FITUR SELF-DESTRUCT (MENGHAPUS JEJAK KODE)
+    setTimeout(() => {
+        // Menghapus isi script ini sendiri dari memori browser
+        const scripts = document.getElementsByTagName('script');
+        for (let i = 0; i < scripts.length; i++) {
+            scripts[i].innerHTML = "/* SYSTEM ANTIHACK ONLINE - SOURCE DESTROYED */";
         }
+        // Memberikan tanda di console jika ada yang mencoba inspeksi
+        console.clear();
+        console.log("%cSYSTEM ANTIHACK ONLINE", "color:red; font-size:30px; font-weight:bold;");
+    }, 1000); // Menghancurkan kode 1 detik setelah loading
+})();
+<\/script>`;
+
+        document.getElementById('resultCode').value = protectedTemplate;
+        document.getElementById('downloadBtn').style.display = 'block';
+        document.getElementById('statusInfo').innerText = "✅ PROTEKSI BERHASIL!";
+    }
+
+    function unduhFile() {
+        const blob = new Blob([document.getElementById('resultCode').value], { type: "text/html" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "index.html";
+        a.click();
     }
 </script>
 
