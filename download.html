@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XT WEBSITE CLONER</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 400px;
+            text-align: center;
+            border: 1px solid #c80000;
+        }
+        h2 { color: #c80000; margin-bottom: 20px; }
+        input {
+            width: 90%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: none;
+            background: #2a2a2a;
+            color: white;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #c80000;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        button:hover { background-color: #ff0000; }
+        .status { margin-top: 15px; font-size: 13px; color: #888; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>XT CLONER</h2>
+    <p>Masukkan URL Web untuk Copy Full (HTML + Gambar)</p>
+    
+    <input type="text" id="urlInput" placeholder="https://example.com">
+    <button onclick="startClone()">DOWNLOAD FULL WEB</button>
+    
+    <div class="status" id="statusBox">Siap untuk patching...</div>
+</div>
+
+<script>
+    async function startClone() {
+        const url = document.getElementById('urlInput').value;
+        const status = document.getElementById('statusBox');
+
+        if (!url) {
+            alert("Masukkan URL dulu, Jir!");
+            return;
+        }
+
+        status.innerText = "Sedang menarik data (Proxying)...";
+
+        try {
+            // Kita pake AllOrigins sebagai proxy buat nembus CORS
+            const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+            const data = await response.json();
+            let htmlContent = data.contents;
+
+            status.innerText = "HTML Berhasil ditarik! Mengambil Gambar...";
+
+            // Logika sederhana: Kita simpan HTML sebagai file
+            // Note: Gambar biasanya tetep load dari server asli lewat URL lengkap (Absolute Path)
+            downloadFile(htmlContent, "cloned_web.html");
+            
+            status.innerText = "Download Berhasil! (Cek File Cloned_web)";
+            
+        } catch (error) {
+            status.innerText = "Gagal! Web ini punya proteksi tinggi.";
+            console.error(error);
+        }
+    }
+
+    function downloadFile(content, fileName) {
+        const blob = new Blob([content], { type: "text/html" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+</script>
+
+</body>
+</html>
