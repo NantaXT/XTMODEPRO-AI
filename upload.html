@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>XTMODE - AUTO UPDATE WEB</title>
+    <style>
+        body { font-family: sans-serif; background: #0f172a; color: white; padding: 20px; }
+        .box { background: #1e293b; padding: 20px; border-radius: 10px; max-width: 800px; margin: auto; }
+        textarea { width: 100%; height: 250px; background: #020617; color: #22c55e; border: 1px solid #334155; margin-top: 10px; font-family: monospace; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; background: #020617; color: white; border: 1px solid #334155; box-sizing: border-box; }
+        .btn { width: 100%; padding: 15px; background: #22c55e; color: white; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h2>XTMODE ADMIN PANEL</h2>
+        
+        <label>1. Masukkan URL Web App Google Script kamu:</label>
+        <input type="text" id="gas-url" placeholder="https://script.google.com/macros/s/.../exec">
+
+        <label>2. Masukkan Link Tujuan (Mediafire/Drive):</label>
+        <input type="text" id="target-link" placeholder="Contoh: https://www.mediafire.com/file/xxxx">
+
+        <label>3. Paste Kode HTML Iklan & Safelink Kamu:</label>
+        <p style="font-size:12px; color:#94a3b8;">Sistem akan otomatis mencari <b>XTMODEPROLINKGET</b> dan menggantinya dengan link di atas.</p>
+        <textarea id="html-code" placeholder="<html>... XTMODEPROLINKGET ...</html>"></textarea>
+
+        <button class="btn" onclick="uploadWeb()">UPDATE & PUBLISH WEB</button>
+    </div>
+
+    <script>
+        async function uploadWeb() {
+            const gasUrl = document.getElementById('gas-url').value;
+            const targetLink = document.getElementById('target-link').value;
+            const htmlRaw = document.getElementById('html-code').value;
+
+            if (!gasUrl || !targetLink || !htmlRaw) return alert("Lengkapi semua kolom!");
+
+            // PROSES PENGGANTIAN TEKS
+            const htmlFinal = htmlRaw.replace(/XTMODEPROLINKGET/g, targetLink);
+
+            // KIRIM KE GOOGLE SCRIPT (UPDATE PERMANEN)
+            try {
+                const response = await fetch(gasUrl, {
+                    method: 'POST',
+                    mode: 'no-cors', // Untuk bypass CORS Google
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ html: htmlFinal })
+                });
+                alert("Selesai! HTML telah diupdate secara permanen. Silakan buka URL Web App kamu.");
+            } catch (e) {
+                alert("Gagal update: " + e.message);
+            }
+        }
+    </script>
+</body>
+</html>
